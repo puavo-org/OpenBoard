@@ -955,7 +955,7 @@ void UBDesktopAnnotationController::updateMask(bool bTransparent)
         p.setPen(Qt::red);
         p.setBrush(QBrush(Qt::red));
 
-        p.drawRect(mTransparentDrawingView->geometry().x(), mTransparentDrawingView->geometry().y(), mTransparentDrawingView->width(), mTransparentDrawingView->height());
+        p.drawRect(mTransparentDrawingView->geometry().x(), mTransparentDrawingView->geometry().y(), mTransparentDrawingView->width() - 2, mTransparentDrawingView->height() - 2);
         p.end();
 
         mTransparentDrawingView->setMask(mMask.mask());
