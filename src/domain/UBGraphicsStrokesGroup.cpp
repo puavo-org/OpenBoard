@@ -128,10 +128,12 @@ void UBGraphicsStrokesGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void UBGraphicsStrokesGroup::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItemGroup::mouseMoveEvent(event);
+    if (!isLocked(this)) {
+        QGraphicsItemGroup::mouseMoveEvent(event);
 
-    event->accept();
-    setSelected(false);
+        event->accept();
+        setSelected(false);
+    }
 }
 
 void UBGraphicsStrokesGroup::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -146,12 +148,15 @@ void UBGraphicsStrokesGroup::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 UBItem* UBGraphicsStrokesGroup::deepCopy() const
 {
     QTransform groupTransform = transform();
+    QPointF groupPos = pos();
 
     UBGraphicsStrokesGroup* copy = new UBGraphicsStrokesGroup();
     copyItemParameters(copy);
     copy->resetTransform();
+    copy->setPos(0,0);
 
     const_cast<UBGraphicsStrokesGroup*>(this)->resetTransform();
+    const_cast<UBGraphicsStrokesGroup*>(this)->setPos(0,0);
 
     QList<QGraphicsItem*> chl = childItems();
 
@@ -173,7 +178,9 @@ UBItem* UBGraphicsStrokesGroup::deepCopy() const
         }
     }
     const_cast<UBGraphicsStrokesGroup*>(this)->setTransform(groupTransform);
-    copy->setTransform(sceneTransform());
+    const_cast<UBGraphicsStrokesGroup*>(this)->setPos(groupPos);
+    copy->setTransform(groupTransform);
+    copy->setPos(groupPos);
 
     return copy;
 }
@@ -184,6 +191,7 @@ void UBGraphicsStrokesGroup::copyItemParameters(UBItem *copy) const
     if(NULL != cp)
     {
         cp->setTransform(transform());
+        cp->setPos(pos());
 
         cp->setFlag(QGraphicsItem::ItemIsMovable, true);
         cp->setFlag(QGraphicsItem::ItemIsSelectable, true);

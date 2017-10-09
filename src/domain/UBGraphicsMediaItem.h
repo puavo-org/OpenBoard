@@ -100,6 +100,7 @@ public:
     virtual void setSourceUrl(const QUrl &pSourceUrl);
     void setSelected(bool selected);
     void setMinimumSize(const QSize& size);
+    void setUuid(const QUuid &pUuid);
 
     virtual void copyItemParameters(UBItem *copy) const;
 
@@ -206,11 +207,14 @@ protected:
 
     QGraphicsVideoItem *mVideoItem;
 
+    virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     virtual void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
     void setPlaceholderVisible(bool visible);
+
+    bool mHasVideoOutput;
 };
 
 
