@@ -160,8 +160,6 @@ class UBSettings : public QObject
         static int pointerDiameter;
         static int boardMargin;
 
-        static QColor crossDarkBackground;
-        static QColor crossLightBackground;
         static QColor paletteColor;
         static QColor opaquePaletteColor;
 
@@ -241,7 +239,7 @@ class UBSettings : public QObject
         UBSetting* appToolBarPositionedAtTop;
         UBSetting* appToolBarDisplayText;
         UBSetting* appEnableAutomaticSoftwareUpdates;
-        UBSetting* appEnableSoftwareUpdates;
+        UBSetting* appSoftwareUpdateURL;
         UBSetting* appToolBarOrientationVertical;
         UBSetting* appPreferredLanguage;
 
@@ -274,6 +272,9 @@ class UBSettings : public QObject
         UBSetting* appStartMode;
 
         UBSetting* featureSliderPosition;
+
+        UBSetting* boardCrossColorDarkBackground;
+        UBSetting* boardCrossColorLightBackground;
 
         UBColorListSetting* boardPenLightBackgroundColors;
         UBColorListSetting* boardPenLightBackgroundSelectedColors;

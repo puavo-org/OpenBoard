@@ -55,6 +55,8 @@ class UBDocumentController : public UBDocumentContainer
 {
     Q_OBJECT
 
+    friend class UBDocumentTreeWidget;
+
     public:
         UBDocumentController(UBMainWindow* mainWindow);
         virtual ~UBDocumentController();
@@ -128,7 +130,8 @@ class UBDocumentController : public UBDocumentContainer
         QString mDefaultDocumentGroupName;
 
         void selectADocumentOnTrashingSelectedOne(UBDocumentGroupTreeItem* groupTi,UBDocumentProxyTreeItem *proxyTi);
-        void selectADocumentOnMultipleTrashing();
+        void selectFirstDocumentInList();
+        void selectATreeItemOnMultipleTrashing(bool selectNewCurrentDocument = false);
         void moveDocumentToTrash(UBDocumentGroupTreeItem* groupTi, UBDocumentProxyTreeItem *proxyTi, bool selectNewDocument);
         void moveFolderToTrash(UBDocumentGroupTreeItem* groupTi);
         void emptyTrash(bool showConfirmationDialog);
@@ -161,7 +164,6 @@ class UBDocumentController : public UBDocumentContainer
 
         void refreshDocumentThumbnailsView(UBDocumentContainer* source);
 };
-
 
 
 #endif /* UBDOCUMENTCONTROLLER_H_ */
